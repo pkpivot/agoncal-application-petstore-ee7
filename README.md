@@ -8,6 +8,25 @@
 
 [Download the code from GitHub](https://github.com/agoncal/agoncal-application-petstore-ee7)
 
+## Running this application in 2023
+
+Building and running historic code is not always straightforward as the dependencies like application servers and frameworks will have changed and moved on. 
+
+The application was originally run on the Wildfly application server. It will not run against Wildfly V 29.0.0 / Jakarta EE 10 (latest available in 2023). I ran it successfully using Wildfly v 20.0.0, building it with Java 1.8.  
+
+You can also run it against Glassfish V 5.0:  To do this: 
+
+1. Edit `src/main/META-INF/persistence.xml` and delete the `<jta-data-source>` element.  
+2. Install Glassfish.
+3. Set your Java version to 1.8
+4. Start the Derby database: 
+```$GLASSFISH_HOME/javadb/bin/startnetworkserver```
+5. Build the application. 
+6. Start Glassfish server ```$GLASSFISH_HOME//bin/asadmin start-domain```
+7. Go to the admin console at http://localhost:4848. 
+8. Click the `Applications` node and deploy `applicationPetstore.war`.  
+
+
 ## Purpose of this application
 
 Do you remember the good old Java [Petstore](http://java.sun.com/developer/releases/petstore/) ? It was a sample application created by Sun for its [Java BluePrints](http://www.oracle.com/technetwork/java/javaee/blueprints/index.html) program. The Java Petstore was designed to illustrate how J2EE (and then Java EE) could be used to develop an eCommerce web application. Yes, the point of the Petstore is to sell pets online. The Petstore had a huge momentum and we started to see plenty of Petstore-like applications flourish. The idea was to build an application with a certain technology. Let's face it, the J2EE version was far too complex using plenty of (today outdated) [design patterns](http://java.sun.com/blueprints/corej2eepatterns/). When I wrote my [Java EE 5 book](http://www.eyrolles.com/Informatique/Livre/java-ee5-9782212120387) back in 2006, I decided to write a Petstore-like application but much simpler. But again, it's out-dated today.
